@@ -58,6 +58,7 @@ export default {
       width: 100%; height: 100%;
       overflow-y: scroll;
       overflow-x: hidden;
+      -webkit-overflow-scrolling : touch;
     }
     .tab_bottom{
       position: absolute;
@@ -74,5 +75,8 @@ export default {
         margin: 50px 0 0 0;
       }
     }
+  }
+  .md-select-content{
+    z-index:10001;
   }
 </style>

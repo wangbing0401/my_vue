@@ -1,6 +1,8 @@
 <template>
-  <div class="home_main">
-    <vue-input placeholder="输入搜索标题" width='100%' @transferData="get_input_text"></vue-input>
+  <div class="home_main" @touchstart="ontouchstart($event)" @touchmove="ontouchmove($event)">
+    <div class="search_input">
+      <vue-input placeholder="输入搜索标题" width='100%' @transferData="get_input_text"></vue-input>
+    </div>
     <div class="card_block" v-for="l in article_list.data" v-on:click="card_block_click(l._id)">
       <img :src="l.article_category_id | article_icon_filter(article_category_list)">
       <div class="text" v-html="l.article_content">
@@ -46,6 +48,12 @@
         api.search_article({article_title:msg, user_id:localStorage.user_id}).then(res => {
           this.article_list = res;
         });
+      },
+      ontouchmove: function (e) {
+        console.log(e);
+      },
+      ontouchstart: function (e) {
+//        console.log(e);
       }
     },
     created(){
@@ -63,7 +71,16 @@
 
 <style lang="scss" scoped>
   .home_main{
-    padding: 15px;
+    position: relative;
+    padding: 50px 15px 0 15px;
+    .search_input{
+      position: fixed;
+      height: 52px;
+      padding-top: 15px;
+      top: 0; left: 15px; right: 15px;
+      z-index: 100;
+      background-color: white;
+    }
     .card_block{
       position: relative;
       margin-bottom: 10px;
@@ -76,7 +93,7 @@
       .text{
         display: -webkit-box;
         margin: 10px 15px 0 15px;
-        line-height: 20px;
+        line-height: 20px; height: 40px;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;

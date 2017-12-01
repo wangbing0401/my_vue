@@ -30,6 +30,17 @@ Vue.filter('article_icon_filter', function (v1, v2) {
         case 'react':
             return require('../assets/img/react_icon.png');
             break;
+        case 'node':
+          return require('../assets/img/node_icon.png');
+          break;
+        case 'meteor':
+          return require('../assets/img/meteor_icon.png');
+          break;
+        case 'mongodb':
+          return require('../assets/img/mongodb_icon.png');
+          break;
+        default:
+          return require('../assets/img/other_icon.png');
     }
 });
 
