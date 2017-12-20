@@ -1,11 +1,11 @@
 <template>
-  <div class="app_body">
+  <div class="app_body" :style="CurrentRouter=='app_home'||CurrentRouter=='article'?{paddingBottom:'57px'}:{}">
     <alert :show="AlertShow"></alert>
     <div class="router_main">
       <router-view></router-view>
     </div>
     <md-bottom-bar v-if="BottomShow" class="md-transparent tab_bottom" md-shift>
-      <md-bottom-bar-item md-icon="ondemand_video" :md-active="CurrentRouter=='home'?true:false" v-on:click="home_click()">首页</md-bottom-bar-item>
+      <md-bottom-bar-item md-icon="ondemand_video" :md-active="CurrentRouter=='app_home'?true:false" v-on:click="home_click()">首页</md-bottom-bar-item>
       <md-bottom-bar-item md-icon="music_note">音乐</md-bottom-bar-item>
       <md-bottom-bar-item md-icon="books" :md-active="CurrentRouter=='article'?true:false" v-on:click="article_click()">文章</md-bottom-bar-item>
       <md-bottom-bar-item md-icon="photo">图片</md-bottom-bar-item>
@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     home_click: function () {
-      this.$router.push('home')
+      this.$router.push('app_home')
     },
     article_click: function () {
       this.$router.push('article')
@@ -39,10 +39,9 @@ export default {
 </script>
 
 <style lang="scss">
-  $background_color:#2196f3;
-  $font_color:rgba(0, 0, 0, 0.54);
   *{
     margin: 0; padding: 0;
+    color: rgba(0, 0, 0, 0.54);
   }
   body{
     position: absolute;
@@ -52,7 +51,6 @@ export default {
   .app_body{
     position: absolute;
     width: 100%; height: 100%;
-    padding-bottom: 57px;
     .router_main{
       position: relative;
       width: 100%; height: 100%;

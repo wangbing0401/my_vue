@@ -26,7 +26,7 @@ export default{
 .alert_main{
   position: absolute;
   font-size: 16px; color: white;
-  width: 50%; height: auto;
+  width: 200px; height: auto;
   text-align: center;
   padding: 20px 10px;
   top: 50%; left: 50%;

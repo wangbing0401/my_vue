@@ -29,6 +29,7 @@ instance.interceptors.response.use((response) => {
 });
 
 var api = {
+    get_user_list:(data) => instance.get('/get_user_list'),
     login:(data) => instance.post('/login', data),
     register:(data) => instance.post('/register', data),
     article_category_list:(data) => instance.get('/article_category_list'),

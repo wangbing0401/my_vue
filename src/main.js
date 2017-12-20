@@ -3,10 +3,12 @@
 import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
+// import './assets/css/base.scss'
 import App from './App'
 import router from './router'
 import store from './vuex_store/store'
 import './filter/filter'
+import './directive/index'
 
 Vue.use(VueMaterial);
 Vue.material.registerTheme('default',{

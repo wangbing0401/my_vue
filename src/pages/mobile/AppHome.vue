@@ -1,5 +1,5 @@
 <template>
-  <div class="home_main" @touchstart="ontouchstart($event)" @touchmove="ontouchmove($event)">
+  <div class="home_main" @touchstart="ontouchstart($event)" @touchmove="ontouchmove($event)" @touchend="ontouchend($event)">
     <div class="search_input">
       <vue-input placeholder="输入搜索标题" width='100%' @transferData="get_input_text"></vue-input>
     </div>
@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
-  import api from '../api/api'
-  import VueInput from '../components/search/index'
+  import api from '../../api/api'
+  import VueInput from '../../components/search/index'
   export default{
     components:{
       VueInput
@@ -50,10 +50,13 @@
         });
       },
       ontouchmove: function (e) {
-        console.log(e);
+        console.log(e.touches[0].pageY);
       },
       ontouchstart: function (e) {
-//        console.log(e);
+        console.log(e.touches[0].pageY);
+      },
+      ontouchend: function (e) {
+
       }
     },
     created(){

@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-  import api from '../api/api'
+  import api from '../../api/api'
   export default{
     data(){
       return{
@@ -39,7 +39,7 @@
     },
     created(){
       this.$store.dispatch('bottom_handel_hide')
-      localStorage.removeItem('user_id')
+//      localStorage.removeItem('user_id')
     }
   }
 </script>
