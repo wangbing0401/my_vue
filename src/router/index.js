@@ -85,6 +85,12 @@ const router = new Router({
           component: (resolve) => {
             require(['../pages/web/Article_info.vue'], resolve)
           }
+        },
+        {
+          path:'me_info',
+          component: (resolve) => {
+            require(['../pages/web/me_info.vue'], resolve)
+          }
         }
       ]
     }

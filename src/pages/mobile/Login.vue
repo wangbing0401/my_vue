@@ -30,7 +30,7 @@
           if (res.success){
             this.$store.dispatch('alert_handle_show', '登录成功');
             localStorage.user_id = res.data
-            this.$router.push('home')
+            this.$router.push('app_home')
           }else{
             this.$store.dispatch('alert_handle_show', '用户名或密码错误');
           }

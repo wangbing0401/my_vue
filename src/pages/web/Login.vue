@@ -40,7 +40,7 @@ export default{
         if (res.success){
           this.$store.dispatch('alert_handle_show', '登录成功');
           localStorage.user_id = res.data
-          this.$router.push('web_home')
+          this.$router.push({path:'/web_home/web_main'})
         }else{
           this.$store.dispatch('alert_handle_show', '用户名或密码错误');
         }

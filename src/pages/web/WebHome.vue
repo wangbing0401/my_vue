@@ -2,7 +2,7 @@
   <div>
     <div class="nav_title">
       <h3 class="title">h5前端论坛</h3>
-      <span class="user_name">810376348@qq.com</span>
+      <span class="user_name" @click="go_user_info()">{{user_name}}</span>
     </div>
     <div class="web_main">
       <router-view></router-view>
@@ -11,7 +11,24 @@
 </template>
 
 <script>
-
+import api from '../../api/api'
+export default{
+  data(){
+      return{
+          user_name:''
+      }
+  },
+  methods:{
+    go_user_info: function () {
+      this.$router.push({path:'/web_home/me_info'});
+    }
+  },
+  created(){
+    api.get_user_list({user_id:localStorage.user_id}).then(res => {
+        this.user_name = res.data.name
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +47,7 @@
       height: 100%; line-height: 50px;
       float: right;
       margin-right: 100px;
+      cursor: pointer;
     }
   }
   .web_main{

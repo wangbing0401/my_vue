@@ -53,7 +53,7 @@
         console.log(e.touches[0].pageY);
       },
       ontouchstart: function (e) {
-        console.log(e.touches[0].pageY);
+        console.log(e.touches);
       },
       ontouchend: function (e) {
 

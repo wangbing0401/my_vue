@@ -4,8 +4,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    // baseURL: 'http://localhost:3000',
-    baseURL: 'http://www.h5vip.org:3000',
+    baseURL: server_url,
     timeout: 1000,
     headers:{'Content-Type': 'application/json', 'Accept': 'application/json'}
 });
@@ -29,7 +28,7 @@ instance.interceptors.response.use((response) => {
 });
 
 var api = {
-    get_user_list:(data) => instance.get('/get_user_list'),
+    get_user_list:(data) => instance.get('/get_user_list', {params:data}),
     login:(data) => instance.post('/login', data),
     register:(data) => instance.post('/register', data),
     article_category_list:(data) => instance.get('/article_category_list'),
