@@ -54,7 +54,6 @@ export default {
     .router_main{
       position: relative;
       width: 100%; height: 100%;
-      overflow-y: scroll;
       overflow-x: hidden;
       -webkit-overflow-scrolling : touch;
     }

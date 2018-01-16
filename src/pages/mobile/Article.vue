@@ -5,21 +5,28 @@
         发布文章
       </router-link>
     </div>
-    <div class="article_block" v-for="(l, index) in article_list" v-on:click="article_line_click(l._id)">
-      {{l.article_title}}
-      <md-button class="md-icon-button" style="float: right;" v-on:click.stop="delete_article(l._id, index)">
-        <md-icon>delete</md-icon>
-      </md-button>
-    </div>
+    <scroll-table class="content_main" :touch-refresh="refreshFetchData">
+      <div class="article_block" v-for="(l, index) in article_list" v-on:click="article_line_click(l._id)">
+        {{l.article_title}}
+        <md-button class="md-icon-button" style="float: right;" v-on:click.stop="delete_article(l._id, index)">
+          <md-icon>delete</md-icon>
+        </md-button>
+      </div>
+    </scroll-table>
   </div>
 </template>
 
 <script>
+  import ScrollTable from '../../components/scroll_table'
   import api from '../../api/api'
   export default{
+    components:{
+      ScrollTable
+    },
     data(){
       return{
-        article_list: null
+        article_list: null,
+        out_canrefresh:false
       }
     },
     methods:{
@@ -33,6 +40,11 @@
             this.article_list.splice(index, 1);
           }
         });
+      },
+      refreshFetchData:  function(finished) {
+        setTimeout(function () {
+          finished()
+        }, 2000)
       }
     },
     created(){
@@ -45,23 +57,31 @@
 
 <style lang="scss" scoped>
   .article_main{
-    padding: 15px;
+    height: 100%; width: 100%;
+    padding-top: 45px;
     .article_top{
+      position: absolute;
+      top: 15px;
       color: blue;
       text-align: right;
-      margin-bottom: 20px;
+      padding: 0 15px;
     }
-    .article_block{
-      width: 100%; height: 40px;
-      padding: 0 10px;
-      line-height: 40px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      box-shadow: 0 0 10px #333333;
-      -webkit-box-shadow: 0 0 5px #333333;
+    .content_main, scroll_main{
+      height: 100%; width: 100%;
+      padding: 0 15px;
+      overflow-y: scroll;
+      .article_block{
+        width: 100%; height: 40px;
+        padding: 0 10px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        box-shadow: 0 0 10px #333333;
+        -webkit-box-shadow: 0 0 5px #333333;
+      }
     }
   }
 </style>

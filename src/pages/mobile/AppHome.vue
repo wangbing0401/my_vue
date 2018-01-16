@@ -1,17 +1,19 @@
 <template>
-  <div class="home_main" @touchstart="ontouchstart($event)" @touchmove="ontouchmove($event)" @touchend="ontouchend($event)">
+  <div class="home_main">
     <div class="search_input">
       <vue-input placeholder="输入搜索标题" width='100%' @transferData="get_input_text"></vue-input>
     </div>
-    <div class="card_block" v-for="l in article_list.data" v-on:click="card_block_click(l._id)">
-      <img :src="l.article_category_id | article_icon_filter(article_category_list)">
-      <div class="text" v-html="l.article_content">
-      </div>
-      <div class="bottom">
-        <h3>{{l.article_title}}</h3>
-        <md-button class="md-icon-button float_right" :style="article_list.collect_article.indexOf(l._id)!=-1?{color:'red'}:{}" v-if="l.author_id!=myself_id" v-on:click.stop="collect_article_click(l._id)">
-          <md-icon>favorite</md-icon>
-        </md-button>
+    <div id="content_main" @touchstart="ontouchstart($event)" @touchmove="ontouchmove($event)" @touchend="ontouchend($event)" @scroll="onscroll($event)">
+      <div class="card_block" v-for="l in article_list.data" v-on:click="card_block_click(l._id)">
+        <img :src="l.article_category_id | article_icon_filter(article_category_list)">
+        <div class="text" v-html="l.article_content">
+        </div>
+        <div class="bottom">
+          <h3>{{l.article_title}}</h3>
+          <md-button class="md-icon-button float_right" :style="article_list.collect_article.indexOf(l._id)!=-1?{color:'red'}:{}" v-if="l.author_id!=myself_id" v-on:click.stop="collect_article_click(l._id)">
+            <md-icon>favorite</md-icon>
+          </md-button>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +29,8 @@
       return{
         article_list:[],
         article_category_list:[],
-        myself_id:localStorage.user_id
+        myself_id:localStorage.user_id,
+        scrollTop:0
       }
     },
     methods:{
@@ -50,13 +53,18 @@
         });
       },
       ontouchmove: function (e) {
-        console.log(e.touches[0].pageY);
+
       },
       ontouchstart: function (e) {
-        console.log(e.touches);
+        console.log(e);
       },
       ontouchend: function (e) {
 
+      },
+      onscroll: function (e) {
+        let el = e.target
+        this.scrollTop = el.scrollTop
+        console.log(this.scrollTop)
       }
     },
     created(){
@@ -75,7 +83,7 @@
 <style lang="scss" scoped>
   .home_main{
     position: relative;
-    padding: 50px 15px 0 15px;
+    padding: 50px 0 0 0;
     .search_input{
       position: fixed;
       height: 52px;
@@ -84,32 +92,36 @@
       z-index: 100;
       background-color: white;
     }
-    .card_block{
-      position: relative;
-      margin-bottom: 10px;
-      margin-top: 10px;
-      box-shadow: 0 0 10px #333333;
-      -webkit-box-shadow: 0 0 10px #333333;
-      img{
-        width: 100%; height: 150px;
-      }
-      .text{
-        display: -webkit-box;
-        margin: 10px 15px 0 15px;
-        line-height: 20px; height: 40px;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-      }
-      .bottom{
-        width: 100%; height: 40px;
+    #content_main{
+      padding:  0 15px;
+      overflow-y: scroll;
+      .card_block{
+        position: relative;
+        margin-bottom: 10px;
         margin-top: 10px;
-        h3{
-          display: inline-block;
-          margin: 10px 15px;
+        box-shadow: 0 0 10px #333333;
+        -webkit-box-shadow: 0 0 10px #333333;
+        img{
+          width: 100%; height: 150px;
         }
-        .float_right{
-          float: right;
+        .text{
+          display: -webkit-box;
+          margin: 10px 15px 0 15px;
+          line-height: 20px; height: 40px;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+        .bottom{
+          width: 100%; height: 40px;
+          margin-top: 10px;
+          h3{
+            display: inline-block;
+            margin: 10px 15px;
+          }
+          .float_right{
+            float: right;
+          }
         }
       }
     }
